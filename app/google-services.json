@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "605061152813",
+    "firebase_url": "https://miraldure-6f67f-default-rtdb.firebaseio.com",
+    "project_id": "miraldure-6f67f",
+    "storage_bucket": "miraldure-6f67f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605061152813:android:6a4de869ad165ee3b638a4",
+        "android_client_info": {
+          "package_name": "com.example.security_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605061152813-32402raeksg84oqe0nna6o4joif9p7vs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.security_project",
+            "certificate_hash": "9be57ec26deb02fd5114041ef5be8b76174ab0ec"
+          }
+        },
+        {
+          "client_id": "605061152813-1qj6ll4q45pvoubf8fkn5imlfc5gvq3u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzK6fswtzev5m5_rYUHl7jfj3iVDrmA_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "605061152813-1qj6ll4q45pvoubf8fkn5imlfc5gvq3u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
