@@ -20,7 +20,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
 
-    private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
+    private var database: FirebaseDatabase = FirebaseDatabase.getInstance() // 파이어 베이스 객체
     private var location_Ref : DatabaseReference = database.getReference("location") // 로케이션 참조
     private val flag_Ref : DatabaseReference = database.getReference("theft") // 플래그 참조
 
@@ -61,15 +61,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
+    //초기 셋팅
     fun init_setting() {
 
-        //초기
-        location_Ref.get().addOnSuccessListener {
-            latitude = it.child("latitude").value.toString().toDouble()
-            longtitude = it.child("longtitude").value.toString().toDouble()
 
-            println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-            println("latitude : " + latitude)
+        location_Ref.get().addOnSuccessListener {
+
+            //파이어베이스 값 읽어오기
+            latitude = it.child("latitude").value.toString().toDouble() // String to Double
+            longtitude = it.child("longtitude").value.toString().toDouble() // String to Double
+
+
+            println("latitude : " + latitude) // 올바른 값이 들어왔는지 Check
 
         }
     }
@@ -82,21 +85,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 latitude = snapshot.child("latitude").value.toString().toDouble()
                 longtitude = snapshot.child("longtitude").value.toString().toDouble()
                 println("latitude : " + latitude)
-                val location = LatLng(latitude, longtitude)
+
+                val location = LatLng(latitude, longtitude) // LatLng -> 위도,경도를 담을 수 있는 객체
 
 
-                if(::marker.isInitialized){
-                    marker.remove()
-                    marker = mMap.addMarker(MarkerOptions().position(location).title("Title"))!!
+                // 마커 표시를 최신 위치만 등록하기 위함
+
+                if(::marker.isInitialized){ // 처음 어플을 켰을 때
+                    marker.remove()  // 이전의 마크 제거
+                    marker = mMap.addMarker(MarkerOptions().position(location).title("도둑(물건) 위치"))!! // 새로운 마크 추가
                 }
-                else{
-                    marker = mMap.addMarker(MarkerOptions().position(location).title("Title"))!!
+                else{ // 그 이후
+                    marker = mMap.addMarker(MarkerOptions().position(location).title("도둑(물건) 위치"))!!
                 }
 
 
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18.5f))
-                list.add(location) // 추가
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18.5f)) // 카메라 이동
+                list.add(location) // 리스트에 현재 위치 추가
+
+                // 물건 위치의 경로 표시
                 polyLineOptions.add(location)
                 mMap.addPolyline(polyLineOptions)
 
@@ -108,7 +116,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         })
     }
 
-    // 플래그 이벤트 발생
+    // 플래그 이벤트(물건 도난) 발생
     fun flag_update(){
 
         flag_Ref.addValueEventListener(object:ValueEventListener{
