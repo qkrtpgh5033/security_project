@@ -89,7 +89,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val location = LatLng(latitude, longtitude) // LatLng -> 위도,경도를 담을 수 있는 객체
 
 
-                // 마커 표시를 최신 위치만 등록하기 위함
+                //  최신 위치만 마커 표시
 
                 if(::marker.isInitialized){ // 처음 어플을 켰을 때
                     marker.remove()  // 이전의 마크 제거
